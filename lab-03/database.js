@@ -6,17 +6,15 @@
  * Course: Backend Development Fundamentals
  *
  * Description:
- * Manages SQLite database connection using 'sqlite' and 'sqlite3'.
- * Handles table creation, initial data seeding, and query execution.
+ * Manages SQLite database connection supporting both traditional 'sqlite3'
+ * and Node.js built-in 'node:sqlite' driver for high cloud compatibility (e.g. Vercel).
  */
 
 const path = require("path");
 const fs = require("fs");
-const { open } = require("sqlite");
-const sqlite3 = require("sqlite3");
 
 // Determine database file location
-// On Vercel Serverless, the root filesystem is read-only. We copy database.db to /tmp/database.db.
+// On Vercel Serverless, the root filesystem is read-only. We copy/create database.db in /tmp.
 let dbPath;
 if (process.env.VERCEL) {
   dbPath = path.join("/tmp", "database.db");
@@ -50,6 +48,43 @@ const initialBooks = [
 ];
 
 /**
+ * Built-in Node.js SQLite adapter (node:sqlite)
+ * Provides seamless zero-dependency fallback for cloud environments (Vercel Node 26)
+ * where native prebuilds are not available.
+ */
+class BuiltInSqliteWrapper {
+  constructor(filename) {
+    const { DatabaseSync } = require("node:sqlite");
+    this.db = new DatabaseSync(filename);
+  }
+
+  async exec(sql) {
+    return this.db.exec(sql);
+  }
+
+  async get(sql, params = []) {
+    const stmt = this.db.prepare(sql);
+    const row = stmt.get(...params);
+    return row ? { ...row } : undefined;
+  }
+
+  async all(sql, params = []) {
+    const stmt = this.db.prepare(sql);
+    const rows = stmt.all(...params);
+    return rows.map((r) => ({ ...r }));
+  }
+
+  async run(sql, params = []) {
+    const stmt = this.db.prepare(sql);
+    const result = stmt.run(...params);
+    return {
+      lastID: Number(result.lastInsertRowid),
+      changes: Number(result.changes),
+    };
+  }
+}
+
+/**
  * Creates table schema and seeds records if empty.
  */
 async function setupDatabase(db) {
@@ -79,20 +114,28 @@ async function setupDatabase(db) {
 
 /**
  * Initializes and returns the SQLite database connection.
- * Uses cached instance if already opened.
+ * Attempts standard sqlite3 driver, seamlessly falling back to built-in node:sqlite.
  */
 async function initializeDB() {
   if (dbInstance) {
     return dbInstance;
   }
 
-  dbInstance = await open({
-    filename: dbPath,
-    driver: sqlite3.Database,
-  });
+  try {
+    const { open } = require("sqlite");
+    const sqlite3 = require("sqlite3");
+    dbInstance = await open({
+      filename: dbPath,
+      driver: sqlite3.Database,
+    });
+    console.log(`[DB] Connected via sqlite3 driver at ${dbPath}`);
+  } catch (err) {
+    console.log(`[DB] Using Node.js built-in node:sqlite engine for cloud runtime: ${err.message}`);
+    dbInstance = new BuiltInSqliteWrapper(dbPath);
+    console.log(`[DB] Connected via built-in node:sqlite at ${dbPath}`);
+  }
 
   await setupDatabase(dbInstance);
-  console.log(`[DB] Connected to SQLite database at ${dbPath}`);
   return dbInstance;
 }
 
@@ -110,6 +153,6 @@ module.exports = {
   initializeDB,
   getDB,
   dbPath,
-  initialBooks
+  initialBooks,
+  BuiltInSqliteWrapper
 };
-

@@ -4,7 +4,7 @@
   "description": "B.Tech Computer Science - Backend Development Fundamentals (BDF) Lab Repository",
   "main": "lab-03/server.js",
   "engines": {
-    "node": "20.x"
+    "node": "26.x"
   },
   "scripts": {
     "start": "node lab-03/server.js",
@@ -14,7 +14,9 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.19.2",
-    "sqlite": "^5.1.1",
+    "sqlite": "^5.1.1"
+  },
+  "optionalDependencies": {
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {

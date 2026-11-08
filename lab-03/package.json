@@ -4,7 +4,7 @@
   "description": "B.Tech Backend Development Fundamentals - Lab 03: REST API, Query Parameters, Validation and Debugging",
   "main": "server.js",
   "engines": {
-    "node": "20.x"
+    "node": "26.x"
   },
   "scripts": {
     "start": "node server.js",
@@ -25,7 +25,9 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.19.2",
-    "sqlite": "^5.1.1",
+    "sqlite": "^5.1.1"
+  },
+  "optionalDependencies": {
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {

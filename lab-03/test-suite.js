@@ -155,8 +155,7 @@ async function runTestSuite() {
 
     // Case 5: Delete an existing book
     {
-      // Delete book 10 (or createdBookId if available)
-      const targetId = 10;
+      const targetId = createdBookId || 10;
       const res = await sendRequest("DELETE", `/books/${targetId}`);
       const pass = res.statusCode === 200 && res.body.message === "Book deleted successfully";
       recordResult(5, "Delete an existing book", "DELETE", `/books/${targetId}`, 200, res.statusCode, pass, {
