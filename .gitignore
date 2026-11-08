@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+lab-03/node_modules/
+
+# Environment Variables & Secrets
+.env
+.env.*
+
+# SQLite Database Files
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+lab-03/*.db
+lab-03/*.db-journal
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+
+# OS Files
+Thumbs.db
+Desktop.ini
+.DS_Store

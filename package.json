@@ -1,0 +1,12 @@
+{
+  "name": "bdf-course-repository",
+  "version": "1.0.0",
+  "description": "B.Tech Computer Science - Backend Development Fundamentals (BDF) Lab Repository",
+  "scripts": {
+    "start": "node lab-03/server.js",
+    "dev": "nodemon lab-03/server.js",
+    "test": "node lab-03/test-suite.js"
+  },
+  "author": "P. Pradeep Yadav (Reg: 252U1R7083)",
+  "license": "ISC"
+}

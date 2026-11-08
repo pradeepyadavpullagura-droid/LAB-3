@@ -1,0 +1,322 @@
+[
+  {
+    "testId": 1,
+    "title": "Get all books",
+    "method": "GET",
+    "endpoint": "/books",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "pass": true,
+    "details": {
+      "bookCount": 10,
+      "sample": {
+        "id": 1,
+        "title": "Clean Code",
+        "author": "Robert C. Martin",
+        "price": 650,
+        "pages": 464
+      }
+    }
+  },
+  {
+    "testId": 2,
+    "title": "Get a book by ID",
+    "method": "GET",
+    "endpoint": "/books/1",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "pass": true,
+    "details": {
+      "book": {
+        "id": 1,
+        "title": "Clean Code",
+        "author": "Robert C. Martin",
+        "price": 650,
+        "pages": 464
+      }
+    }
+  },
+  {
+    "testId": 3,
+    "title": "Create a new book",
+    "method": "POST",
+    "endpoint": "/books",
+    "expectedStatus": 201,
+    "actualStatus": 201,
+    "pass": true,
+    "details": {
+      "created": {
+        "id": 11,
+        "title": "The Pragmatic Node.js Architect",
+        "author": "P. Pradeep Yadav",
+        "price": 750,
+        "pages": 380
+      }
+    }
+  },
+  {
+    "testId": 4,
+    "title": "Update an existing book",
+    "method": "PUT",
+    "endpoint": "/books/1",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "pass": true,
+    "details": {
+      "updated": {
+        "id": 1,
+        "title": "Clean Code: Revised & Updated",
+        "author": "Robert C. Martin",
+        "price": 720,
+        "pages": 475
+      }
+    }
+  },
+  {
+    "testId": 5,
+    "title": "Delete an existing book",
+    "method": "DELETE",
+    "endpoint": "/books/10",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "pass": true,
+    "details": {
+      "message": "Book deleted successfully"
+    }
+  },
+  {
+    "testId": 6,
+    "title": "Search by partial title",
+    "method": "GET",
+    "endpoint": "/books?search_q=JavaScript",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "pass": true,
+    "details": {
+      "matchingCount": 2,
+      "titles": [
+        "JavaScript: The Good Parts",
+        "Eloquent JavaScript"
+      ]
+    }
+  },
+  {
+    "testId": 7,
+    "title": "Sort in ascending order",
+    "method": "GET",
+    "endpoint": "/books?order_by=price&order=ASC",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "pass": true,
+    "details": {
+      "prices": [
+        399,
+        450,
+        550,
+        720,
+        750,
+        799,
+        899,
+        950,
+        1100,
+        1250
+      ]
+    }
+  },
+  {
+    "testId": 8,
+    "title": "Sort in descending order",
+    "method": "GET",
+    "endpoint": "/books?order_by=price&order=DESC",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "pass": true,
+    "details": {
+      "prices": [
+        1250,
+        1100,
+        950,
+        899,
+        799,
+        750,
+        720,
+        550,
+        450,
+        399
+      ]
+    }
+  },
+  {
+    "testId": 9,
+    "title": "Apply limit and offset",
+    "method": "GET",
+    "endpoint": "/books?limit=3&offset=2",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "pass": true,
+    "details": {
+      "count": 3,
+      "ids": [
+        3,
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "testId": 10,
+    "title": "Filter by minimum price",
+    "method": "GET",
+    "endpoint": "/books?min_price=600",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "pass": true,
+    "details": {
+      "minPriceFilter": 600,
+      "resultPrices": [
+        720,
+        799,
+        1250,
+        899,
+        950,
+        1100,
+        750
+      ]
+    }
+  },
+  {
+    "testId": 11,
+    "title": "Filter by maximum price",
+    "method": "GET",
+    "endpoint": "/books?max_price=800",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "pass": true,
+    "details": {
+      "maxPriceFilter": 800,
+      "resultPrices": [
+        720,
+        799,
+        450,
+        550,
+        399,
+        750
+      ]
+    }
+  },
+  {
+    "testId": 12,
+    "title": "Apply min & max price together",
+    "method": "GET",
+    "endpoint": "/books?min_price=500&max_price=900",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "pass": true,
+    "details": {
+      "range": "500 - 900",
+      "resultPrices": [
+        720,
+        799,
+        550,
+        899,
+        750
+      ]
+    }
+  },
+  {
+    "testId": 13,
+    "title": "Create a book without title",
+    "method": "POST",
+    "endpoint": "/books",
+    "expectedStatus": 400,
+    "actualStatus": 400,
+    "pass": true,
+    "details": {
+      "errorMessage": "Title is required"
+    }
+  },
+  {
+    "testId": 14,
+    "title": "Create a book without author",
+    "method": "POST",
+    "endpoint": "/books",
+    "expectedStatus": 400,
+    "actualStatus": 400,
+    "pass": true,
+    "details": {
+      "errorMessage": "Author is required"
+    }
+  },
+  {
+    "testId": 15,
+    "title": "Create a book with non-numeric price",
+    "method": "POST",
+    "endpoint": "/books",
+    "expectedStatus": 400,
+    "actualStatus": 400,
+    "pass": true,
+    "details": {
+      "errorMessage": "Price must be a valid number"
+    }
+  },
+  {
+    "testId": 16,
+    "title": "Request book with non-existing ID",
+    "method": "GET",
+    "endpoint": "/books/9999",
+    "expectedStatus": 404,
+    "actualStatus": 404,
+    "pass": true,
+    "details": {
+      "errorMessage": "Book with ID 9999 not found"
+    }
+  },
+  {
+    "testId": 17,
+    "title": "Update a non-existing book",
+    "method": "PUT",
+    "endpoint": "/books/9999",
+    "expectedStatus": 404,
+    "actualStatus": 404,
+    "pass": true,
+    "details": {
+      "errorMessage": "Book with ID 9999 not found"
+    }
+  },
+  {
+    "testId": 18,
+    "title": "Delete a non-existing book",
+    "method": "DELETE",
+    "endpoint": "/books/9999",
+    "expectedStatus": 404,
+    "actualStatus": 404,
+    "pass": true,
+    "details": {
+      "errorMessage": "Book with ID 9999 not found"
+    }
+  },
+  {
+    "testId": 19,
+    "title": "Invalid sorting column",
+    "method": "GET",
+    "endpoint": "/books?order_by=invalid_column",
+    "expectedStatus": 400,
+    "actualStatus": 400,
+    "pass": true,
+    "details": {
+      "errorMessage": "Invalid sorting column 'invalid_column'. Allowed columns: id, title, author, price, pages"
+    }
+  },
+  {
+    "testId": 20,
+    "title": "Invalid sorting direction",
+    "method": "GET",
+    "endpoint": "/books?order=SIDEWAYS",
+    "expectedStatus": 400,
+    "actualStatus": 400,
+    "pass": true,
+    "details": {
+      "errorMessage": "Invalid sorting direction 'SIDEWAYS'. Allowed values: ASC, DESC"
+    }
+  }
+]
