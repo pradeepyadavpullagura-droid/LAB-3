@@ -262,3 +262,4 @@ if __name__ == "__main__":
     generate_query_params_screenshot()
     generate_database_screenshot()
     print("\nAll 5 verification screenshots generated successfully in screenshots/!")
+
