@@ -8,7 +8,8 @@
 - **Section:** `CSE-A` (Placeholder / Default)
 - **Course:** B.Tech Computer Science & Engineering - Backend Development Fundamentals (BDF)
 - **Lab Session:** Lab 03 - REST API, Query Parameters, Validation and Debugging
-- **Repository Location:** `lab-03/`
+- **GitHub Repository:** [https://github.com/pradeepyadavpullagura-droid/LAB-3](https://github.com/pradeepyadavpullagura-droid/LAB-3)
+- **Project Folder:** `lab-03/`
 
 ---
 
