@@ -1,0 +1,139 @@
+### ==============================================================================
+### BDF LAB 03 - REST Client Test Requests
+### Student: P. Pradeep Yadav | Reg No: 252U1R7083
+### Course: Backend Development Fundamentals
+### ==============================================================================
+
+@baseUrl = http://localhost:3000
+
+### 00. Root Route / API Directory
+GET {{baseUrl}}/
+Accept: application/json
+
+### ==============================================================================
+### SUCCESS CASES (1 to 12)
+### ==============================================================================
+
+### 01. Get All Books
+GET {{baseUrl}}/books
+Accept: application/json
+
+### 02. Get Book by ID
+GET {{baseUrl}}/books/1
+Accept: application/json
+
+### 03. Create a New Book
+POST {{baseUrl}}/books
+Content-Type: application/json
+
+{
+  "title": "The Pragmatic Node.js Architect",
+  "author": "P. Pradeep Yadav",
+  "price": 750,
+  "pages": 380
+}
+
+### 04. Update an Existing Book
+PUT {{baseUrl}}/books/1
+Content-Type: application/json
+
+{
+  "title": "Clean Code: Revised & Updated",
+  "author": "Robert C. Martin",
+  "price": 720,
+  "pages": 475
+}
+
+### 05. Delete an Existing Book
+DELETE {{baseUrl}}/books/10
+Accept: application/json
+
+### 06. Search by Partial Title (LIKE)
+GET {{baseUrl}}/books?search_q=JavaScript
+Accept: application/json
+
+### 07. Sort in Ascending Order
+GET {{baseUrl}}/books?order_by=price&order=ASC
+Accept: application/json
+
+### 08. Sort in Descending Order
+GET {{baseUrl}}/books?order_by=price&order=DESC
+Accept: application/json
+
+### 09. Apply Limit and Offset (Pagination)
+GET {{baseUrl}}/books?limit=3&offset=2
+Accept: application/json
+
+### 10. Filter by Minimum Price
+GET {{baseUrl}}/books?min_price=600
+Accept: application/json
+
+### 11. Filter by Maximum Price
+GET {{baseUrl}}/books?max_price=800
+Accept: application/json
+
+### 12. Apply Minimum and Maximum Price Together
+GET {{baseUrl}}/books?min_price=500&max_price=900
+Accept: application/json
+
+### ==============================================================================
+### FAILURE & VALIDATION CASES (13 to 20)
+### ==============================================================================
+
+### 13. Create a Book Without Title (Expected: 400 Bad Request)
+POST {{baseUrl}}/books
+Content-Type: application/json
+
+{
+  "author": "Anonymous Author",
+  "price": 500,
+  "pages": 200
+}
+
+### 14. Create a Book Without Author (Expected: 400 Bad Request)
+POST {{baseUrl}}/books
+Content-Type: application/json
+
+{
+  "title": "Book Without Author",
+  "price": 500,
+  "pages": 200
+}
+
+### 15. Create a Book with Non-Numeric Price (Expected: 400 Bad Request)
+POST {{baseUrl}}/books
+Content-Type: application/json
+
+{
+  "title": "Book with Non-Numeric Price",
+  "author": "Valid Author",
+  "price": "free_of_cost",
+  "pages": 200
+}
+
+### 16. Request a Book With Non-Existing ID (Expected: 404 Not Found)
+GET {{baseUrl}}/books/9999
+Accept: application/json
+
+### 17. Update a Non-Existing Book (Expected: 404 Not Found)
+PUT {{baseUrl}}/books/9999
+Content-Type: application/json
+
+{
+  "title": "Phantom Book",
+  "author": "Ghost",
+  "price": 999,
+  "pages": 100
+}
+
+### 18. Delete a Non-Existing Book (Expected: 404 Not Found)
+DELETE {{baseUrl}}/books/9999
+Accept: application/json
+
+### 19. Invalid Sorting Column (Expected: 400 Bad Request)
+GET {{baseUrl}}/books?order_by=invalid_column
+Accept: application/json
+
+### 20. Invalid Sorting Direction (Expected: 400 Bad Request)
+GET {{baseUrl}}/books?order=SIDEWAYS
+Accept: application/json
