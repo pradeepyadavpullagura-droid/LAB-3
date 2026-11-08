@@ -1,10 +1,16 @@
 # Backend Development Fundamentals (BDF) - Lab Projects
 
+> **Lab 03 Live Deployment:** [https://lab-3-kq6x.vercel.app](https://lab-3-kq6x.vercel.app)  
+> **GitHub Repository:** [https://github.com/pradeepyadavpullagura-droid/LAB-3](https://github.com/pradeepyadavpullagura-droid/LAB-3)
+
+---
+
 ### Student Information
 - **Student Name:** P. Pradeep Yadav
 - **Registration Number:** `252U1R7083`
 - **Section:** CSE-A
 - **Course:** B.Tech Computer Science & Engineering - Backend Development Fundamentals
+- **Live API Endpoint:** [https://lab-3-kq6x.vercel.app](https://lab-3-kq6x.vercel.app)
 - **GitHub Repository:** [https://github.com/pradeepyadavpullagura-droid/LAB-3](https://github.com/pradeepyadavpullagura-droid/LAB-3)
 
 ---

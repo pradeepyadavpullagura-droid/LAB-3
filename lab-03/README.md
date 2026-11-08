@@ -1,13 +1,17 @@
 # Lab 3: REST API, Query Parameters, Validation, Debugging
 
+> **Live Deployment URL:** [https://lab-3-kq6x.vercel.app](https://lab-3-kq6x.vercel.app)  
+> **GitHub Repository:** [https://github.com/pradeepyadavpullagura-droid/LAB-3](https://github.com/pradeepyadavpullagura-droid/LAB-3)
+
 ---
 
 ### Student Information
 - **Student Name:** P. Pradeep Yadav
 - **Registration Number:** `252U1R7083`
-- **Section:** `CSE-A` (Placeholder / Default)
+- **Section:** `CSE-A`
 - **Course:** B.Tech Computer Science & Engineering - Backend Development Fundamentals (BDF)
 - **Lab Session:** Lab 03 - REST API, Query Parameters, Validation and Debugging
+- **Live API Endpoint:** [https://lab-3-kq6x.vercel.app](https://lab-3-kq6x.vercel.app)
 - **GitHub Repository:** [https://github.com/pradeepyadavpullagura-droid/LAB-3](https://github.com/pradeepyadavpullagura-droid/LAB-3)
 - **Project Folder:** `lab-03/`
 

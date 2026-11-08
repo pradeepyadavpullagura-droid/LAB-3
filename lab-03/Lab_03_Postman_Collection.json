@@ -8,6 +8,11 @@
   "variable": [
     {
       "key": "base_url",
+      "value": "https://lab-3-kq6x.vercel.app",
+      "type": "string"
+    },
+    {
+      "key": "local_url",
       "value": "http://localhost:3000",
       "type": "string"
     }
