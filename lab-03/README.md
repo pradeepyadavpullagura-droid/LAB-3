@@ -332,6 +332,9 @@ All test runs and database states were executed live and captured directly insid
 ## 13. Deployment Information
 
 ### Deployment Options:
+- **Vercel Serverless Deployment:**
+  The application is pre-configured with `vercel.json` and `api/index.js` targeting Node.js 26.x. On Vercel's serverless platform, the SQLite database is automatically initialized and persisted in the writable `/tmp/database.db` directory, running seamlessly with zero external native compilation dependencies.
+
 - **Render / Railway Deployment:**
   The server is built with standard Node.js/Express and binds to `process.env.PORT || 3000`. To deploy to Render/Railway:
   1. Connect GitHub repository.
