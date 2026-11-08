@@ -16,9 +16,22 @@ const { open } = require("sqlite");
 const sqlite3 = require("sqlite3");
 
 // Determine database file location
-const dbPath = process.env.VERCEL
-  ? path.join("/tmp", "database.db")
-  : path.join(__dirname, "database.db");
+// On Vercel Serverless, the root filesystem is read-only. We copy database.db to /tmp/database.db.
+let dbPath;
+if (process.env.VERCEL) {
+  dbPath = path.join("/tmp", "database.db");
+  const sourceDb = path.join(__dirname, "database.db");
+  if (!fs.existsSync(dbPath) && fs.existsSync(sourceDb)) {
+    try {
+      fs.copyFileSync(sourceDb, dbPath);
+      console.log("[DB] Pre-existing database copied to /tmp for Vercel write access.");
+    } catch (e) {
+      console.error("[DB] Note copying database to /tmp:", e.message);
+    }
+  }
+} else {
+  dbPath = path.join(__dirname, "database.db");
+}
 
 let dbInstance = null;
 
